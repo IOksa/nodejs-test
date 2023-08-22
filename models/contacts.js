@@ -27,7 +27,7 @@ const removeContact = async (id) => {
 }
 
 const addContact = async (body) => {
-  console.log('addContact');
+
   const contacts = await listContacts();
   const newContact = {
       id: crypto.randomUUID(),
@@ -39,7 +39,7 @@ const addContact = async (body) => {
 }
 
 const updateContact = async (id, body) => {
-  console.log('updateContact');
+
   const contacts = await listContacts();
   const index = contacts.findIndex(contact => contact.id === id);
   if(index === -1){
