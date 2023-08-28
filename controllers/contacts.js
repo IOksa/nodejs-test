@@ -23,7 +23,6 @@ const getById = async (req, res) => {
 const add = async (req, res) => {
 
     const result = await Contact.create(req.body);
-    console.log(result);
     res.status(201).json(result);
 
 };
@@ -57,7 +56,7 @@ const deleteById = async (req, res) => {
 
 const updateStatusContact = async (req, res)=>{
     const {id} = req.params;
-    console.log("req.body=", req.body);
+
     const result = await Contact.findByIdAndUpdate(id, req.body,{new: true});
     if(!result) {
         throw HttpError(404, "Not found");
