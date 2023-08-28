@@ -5,8 +5,7 @@ const validateBody = schema => {
     
     const func = (req, res, next)=> {
        
-        if(isEmpty(req.body)){
-            
+        if(isEmpty(req.body)){        
             next(HttpError(400, 'missing fields'));
         }
         else{
