@@ -41,10 +41,10 @@ const addSchema = Joi.object({
       'any.required': 'missing required phone field'
     }),
     
-    favorite: Joi.boolean().required().messages({
+    favorite: Joi.boolean().messages({
        'string.base': '"favorite" should be a type of "boolean"',
-       'string.empty': '"favorite" cannot be an empty field',
-       'any.required': 'missing field favorite'
+       'string.empty': '"favorite" cannot be an empty field'
+       
       }),
 });
 
