@@ -46,6 +46,11 @@ const addSchema = Joi.object({
        'string.empty': '"favorite" cannot be an empty field'
        
       }),
+      owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+      }
 });
 
 const updateFavoriteSchema = Joi.object({
