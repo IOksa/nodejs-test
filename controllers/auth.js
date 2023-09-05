@@ -42,7 +42,7 @@ const login = async(req, res)=> {
         id: user._id,
     }
 
-    console.log("SECRET_KEY=", SECRET_KEY);
+   
     const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
    
     await User.findByIdAndUpdate(user._id, {token});
@@ -69,9 +69,26 @@ const logout = async(req, res) => {
     const {_id} = req.user;
     await User.findByIdAndUpdate(_id, {token: ""});
 
-    res.json({
-        message: "Logout success"
+    res.status(204).json({
+        message: ""
     })
+}
+
+
+const updateSubscription = async(req, res)=>{
+    const {_id} = req.user;
+   
+    const result = await User.findByIdAndUpdate(_id, req.body,{new: true});
+    if(!result) {
+        throw HttpError(404, "Not found");
+    }
+    res.json({
+        user:{
+            email: result.email,
+            subscription: result.subscription,
+        }
+});
+
 }
 
 module.exports = {
@@ -79,4 +96,5 @@ module.exports = {
     login: ctrlWrapper(login),
     getCurrent: ctrlWrapper(getCurrent),
     logout: ctrlWrapper(logout),
+    updateSubscription: ctrlWrapper(updateSubscription),
 }
