@@ -1,7 +1,7 @@
 const jimp = require("jimp");
 const path = require('path');
 
-const resize = (req)=>{
+const resize = (req, res, next)=>{
    
     const {originalname} = req.file;
     const pathName = path.join(__dirname, "../", "tmp", originalname);
@@ -11,8 +11,7 @@ const resize = (req)=>{
     .catch((err) => {
         console.log(err);
       });
- 
-      console.log("resize");
+      next();
 };
 
 module.exports = resize;

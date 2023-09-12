@@ -98,7 +98,7 @@ const updateSubscription = async(req, res)=>{
 
 
 const updateAvatar = async(req, res)=> {
-    console.log("updateAvatar");
+
     const {_id} = req.user;
     const {path: tempUpload, originalname} = req.file;
     const filename = `${_id}_${originalname}`;
