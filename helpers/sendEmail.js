@@ -18,7 +18,7 @@ const transport = nodemailer.createTransport(nodemailerConfig);
 
 function sendEmail(message) {
   message['from'] = MAIL_SENDER;
-  console.log("HOST_MAIL=", HOST_MAIL);
+
   return transport.sendMail(message);
 }
 
