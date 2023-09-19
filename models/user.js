@@ -28,7 +28,16 @@ const userSchema = new Schema({
     avatarURL: {
         type: String,
         required: true,
-    }
+    },
+    verify: {
+        type: Boolean,
+        default: false,
+    },
+
+    verificationToken: {
+        type: String,
+        default: ""
+    },
 }, {versionKey: false, timestamps: true});
 
 userSchema.post("save", handleMongooseError);
@@ -62,6 +71,14 @@ const loginSchema = Joi.object({
       
 })
 
+const emailSchema = Joi.object({
+    email: Joi.string().required().messages({
+        'string.base': '"email" should be a type of "string"',
+        'string.empty': '"email" cannot be an empty field',
+        'any.required': 'missing required field email'
+      }),
+})
+
 const updateSubscriptionSchema = Joi.object({
     subscription: Joi.string().valid("starter", "pro", "business").required(),
 })
@@ -69,6 +86,7 @@ const updateSubscriptionSchema = Joi.object({
 const schemas = {
     registerSchema,
     loginSchema,
+    emailSchema,
     updateSubscriptionSchema,
 }
 
