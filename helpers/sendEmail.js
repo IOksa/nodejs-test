@@ -1,23 +1,24 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const { MAILTRAP_USER, MAILTRAP_PASS, HOST_MAIL, MAIL_SENDER } = process.env;
+const { EMAIL_USER,  EMAIL_PASS, EMAIL_SENDER} = process.env;
 
 
 const nodemailerConfig = {
-  host: HOST_MAIL,
-  port: 2525,
-  auth: {
-    user: MAILTRAP_USER,
-    pass: MAILTRAP_PASS,
-  },
+  host: "s3.thehost.com.ua",
+    port: 465,
+    secure: true,
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
+    },
 };
 
 const transport = nodemailer.createTransport(nodemailerConfig);
 
 
 function sendEmail(message) {
-  message['from'] = MAIL_SENDER;
+  message['from'] = EMAIL_SENDER;
 
   return transport.sendMail(message);
 }
