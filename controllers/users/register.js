@@ -9,7 +9,7 @@ const {HttpError, sendEmail} = require("../../helpers");
 const {BASE_URL} = process.env;
 
 const register = async(req, res)=> {
-    const {email, password} = req.body;
+    const {name, email, password} = req.body;
     const user = await User.findOne({email});
 
     if(user){
@@ -36,6 +36,7 @@ const register = async(req, res)=> {
 
     res.status(201).json({
         user:{
+            name:  newUser.name,
             email: newUser.email,
             subscription: newUser.subscription,
         }

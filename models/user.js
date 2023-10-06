@@ -4,6 +4,12 @@ const Joi = require("joi");
 const {handleMongooseError} = require("../helpers");
 
 const userSchema = new Schema({
+ 
+    name: {
+        type: String,
+        required: [true, 'name is required'],
+    },
+
     email: {
         type: String,
         unique: true,
@@ -43,6 +49,11 @@ const userSchema = new Schema({
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
+    name: Joi.string().required().messages({
+        'string.base': '"name" should be a type of "string"',
+        'string.empty': '"name" cannot be an empty field',
+        'any.required': 'missing required name field'
+      }),
     email: Joi.string().required().messages({
         'string.base': '"email" should be a type of "string"',
         'string.empty': '"email" cannot be an empty field',
